@@ -9,7 +9,7 @@ import {StackNavigator} from 'react-navigation'
 //组件
 import TextComponent from './components/Text'
 import AnimatedComponent from './components/Animated'
-
+import TransformComponent from './components/Transform'
 let arrComponent = [
     {
         text:'TextComponent(Text组件)',
@@ -19,6 +19,10 @@ let arrComponent = [
         text:'AnimatedComponent(Animated组件)',
         router:'animated',
     },
+    {
+        text:'TransformComponent(Transform)',
+        router:'transform',
+    },
 ];
 
 let arrRouter = {
@@ -27,6 +31,9 @@ let arrRouter = {
     },
     animated:{
         screen:AnimatedComponent
+    },
+    transform:{
+        screen:TransformComponent
     }
 };
 
@@ -84,7 +91,6 @@ const Router = StackNavigator({
         backgroundColor:'#fff'
     },
     navigationOptions: ({ navigation })=>{
-        console.log(navigation)
         let title=navigation.state.params?navigation.state.params.title:'首页'
         return {
             title: `${title}`
