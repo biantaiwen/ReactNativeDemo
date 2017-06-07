@@ -10,6 +10,7 @@ import {StackNavigator} from 'react-navigation'
 import TextComponent from './components/Text'
 import AnimatedComponent from './components/Animated'
 import TransformComponent from './components/Transform'
+import ListViewPaging from './components/ListViewPaging'
 let arrComponent = [
     {
         text:'TextComponent(Text组件)',
@@ -23,6 +24,10 @@ let arrComponent = [
         text:'TransformComponent(Transform)',
         router:'transform',
     },
+    {
+        text:'ListViewPaging(ListView)',
+        router:'listviewpaging',
+    },
 ];
 
 let arrRouter = {
@@ -34,6 +39,9 @@ let arrRouter = {
     },
     transform:{
         screen:TransformComponent
+    },
+    listviewpaging:{
+        screen:ListViewPaging
     }
 };
 

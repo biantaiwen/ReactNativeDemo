@@ -20,6 +20,15 @@ class AnimatedComponent extends Component {
             animWidth1:new Animated.Value(100),
             animWidth2:new Animated.Value(100),
             animWidth3:new Animated.Value(100),
+            animWidth4:new Animated.Value(100),
+            animWidth5:new Animated.Value(100),
+            animWidth6:new Animated.Value(100),
+            animWidth4a:new Animated.Value(100),
+            animWidth5a:new Animated.Value(100),
+            animWidth6a:new Animated.Value(100),
+            animWidth7:new Animated.Value(100),
+            animWidth8:new Animated.Value(100),
+            animWidth9:new Animated.Value(100),
         }
     }
     componentDidMount(){
@@ -53,6 +62,114 @@ class AnimatedComponent extends Component {
         parallel.start((a)=>{console.log('动画执行完毕',a)})
 
     }
+
+    sequenceAnim (){
+        this.state.animWidth4.setValue(100)
+        this.state.animWidth5.setValue(100)
+        this.state.animWidth6.setValue(100)
+        let sequence = Animated.sequence([
+            Animated.timing(
+                this.state.animWidth4,
+                {
+                    toValue:30,
+                    duration: 4000,
+                    easing: Easing.linear
+                }),
+            Animated.delay(3000),
+            Animated.spring(
+                this.state.animWidth5,
+                {
+                    toValue:300,
+                    friction:2,
+                    tension:40
+                }),
+            Animated.delay(5000),
+            Animated.timing(
+                this.state.animWidth6,
+                {
+                    toValue:300,
+                }),
+        ]);
+        sequence.start((a)=>{console.log('动画执行完毕',a)})
+
+    }
+
+    sequenceAnima (){
+        this.state.animWidth4a.setValue(100)
+        this.state.animWidth5a.setValue(100)
+        this.state.animWidth6a.setValue(100)
+        let sequence = Animated.sequence([
+            Animated.parallel([
+                Animated.timing(
+                    this.state.animWidth4a,
+                    {
+                        toValue:30,
+                        duration: 4000,
+                        easing: Easing.linear
+                    }),
+                Animated.spring(
+                    this.state.animWidth5a,
+                    {
+                        toValue:300,
+                        friction:2,
+                        tension:40
+                    }),
+            ]),
+            Animated.timing(
+                this.state.animWidth6a,
+                {
+                    toValue:300,
+                }),
+        ]);
+        sequence.start((a)=>{console.log('动画执行完毕',a)})
+
+    }
+    staggerAnim (){
+        this.state.animWidth7.setValue(100)
+        this.state.animWidth8.setValue(100)
+        this.state.animWidth9.setValue(100)
+        let stagger = Animated.stagger(
+            3000, [
+                Animated.timing(
+                    this.state.animWidth7,
+                    {
+                        toValue:30,
+                        duration: 4000,
+                        easing: Easing.linear
+                    }),
+                Animated.timing(
+                    this.state.animWidth8,
+                    {
+                        toValue:30,
+                        duration: 4000,
+                        easing: Easing.linear
+                    }),
+                Animated.timing(
+                    this.state.animWidth9,
+                    {
+                        toValue:30,
+                        duration: 4000,
+                        easing: Easing.linear
+                    }),
+                // Animated.delay(3000),
+                // Animated.spring(
+                //     this.state.animWidth8,
+                //     {
+                //         toValue:300,
+                //         friction:2,
+                //         tension:40
+                //     }),
+                // // Animated.delay(5000),
+                // Animated.timing(
+                //     this.state.animWidth9,
+                //     {
+                //         toValue:300,
+                //     }),
+        ]);
+        stagger.start((a)=>{console.log('动画执行完毕',a)})
+
+    }
+
     textOpacity1 (){
         // console.log(this)
         let timing = Animated.timing(
@@ -155,6 +272,63 @@ class AnimatedComponent extends Component {
             <TouchableOpacity onPress={this.parallelAnim.bind(this)}>
                 <Text style={{fontSize:30,color:'#333'}}>同时执行</Text>
             </TouchableOpacity>
+
+
+            <View style={{alignSelf:'flex-start'}}>
+                <Animated.View
+                    style={{width:this.state.animWidth4,height:30,backgroundColor:'#000',marginVertical:10}}
+                >
+                </Animated.View>
+                <Animated.View
+                    style={{width:this.state.animWidth5,height:30,backgroundColor:'#000',marginVertical:10}}
+                >
+                </Animated.View>
+                <Animated.View
+                    style={{width:this.state.animWidth6,height:30,backgroundColor:'#000',marginVertical:10}}
+                >
+                </Animated.View>
+            </View>
+            <TouchableOpacity onPress={this.sequenceAnim.bind(this)}>
+                <Text style={{fontSize:30,color:'#333'}}>顺序执行</Text>
+            </TouchableOpacity>
+
+
+            <View style={{alignSelf:'flex-start'}}>
+                <Animated.View
+                    style={{width:this.state.animWidth4a,height:30,backgroundColor:'#444',marginVertical:10}}
+                >
+                </Animated.View>
+                <Animated.View
+                    style={{width:this.state.animWidth5a,height:30,backgroundColor:'#444',marginVertical:10}}
+                >
+                </Animated.View>
+                <Animated.View
+                    style={{width:this.state.animWidth6a,height:30,backgroundColor:'#444',marginVertical:10}}
+                >
+                </Animated.View>
+            </View>
+            <TouchableOpacity onPress={this.sequenceAnima.bind(this)}>
+                <Text style={{fontSize:30,color:'#333'}}>顺序执行</Text>
+            </TouchableOpacity>
+
+            <View style={{alignSelf:'flex-start'}}>
+                <Animated.View
+                    style={{width:this.state.animWidth7,height:30,backgroundColor:'#666',marginVertical:10}}
+                >
+                </Animated.View>
+                <Animated.View
+                    style={{width:this.state.animWidth8,height:30,backgroundColor:'#666',marginVertical:10}}
+                >
+                </Animated.View>
+                <Animated.View
+                    style={{width:this.state.animWidth9,height:30,backgroundColor:'#666',marginVertical:10}}
+                >
+                </Animated.View>
+            </View>
+            <TouchableOpacity onPress={this.staggerAnim.bind(this)}>
+                <Text style={{fontSize:30,color:'#333'}}>延迟执行</Text>
+            </TouchableOpacity>
+
         </ScrollView>
 
         )
